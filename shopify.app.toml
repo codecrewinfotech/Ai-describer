@@ -1,0 +1,24 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "4653d0dc46dda37af1fb314984b632cc"
+name = "Ai Describer"
+application_url = "https://jul-inch-decimal-nikon.trycloudflare.com"
+embedded = true
+handle = "ai-describer"
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2025-07"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = ["https://jul-inch-decimal-nikon.trycloudflare.com/auth/callback", "https://jul-inch-decimal-nikon.trycloudflare.com/auth/shopify/callback", "https://jul-inch-decimal-nikon.trycloudflare.com/api/auth/callback"]
+
+[pos]
+embedded = false
