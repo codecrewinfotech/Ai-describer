@@ -21,7 +21,6 @@ import {
 } from "@shopify/polaris";
 import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
-import { gql } from "graphql-request";
 
 // Fixed: Properly construct the endpoint URL
 const getEndpoint = () => {
@@ -84,8 +83,8 @@ export const loader = async ({ request }) => {
     return items;
   };
 
-  // Fetch all products
-  const productQuery = gql`
+  // Fetch all products - Using template literals instead of gql
+  const productQuery = `
     query getProducts($first: Int!, $after: String) {
       products(first: $first, after: $after) {
         edges {
@@ -114,8 +113,8 @@ export const loader = async ({ request }) => {
     }
   `;
 
-  // Fetch all collections
-  const collectionQuery = gql`
+  // Fetch all collections - Using template literals instead of gql
+  const collectionQuery = `
     query getCollections($first: Int!, $after: String) {
       collections(first: $first, after: $after) {
         edges {
@@ -341,6 +340,7 @@ export const loader = async ({ request }) => {
     originalContentsCount: originalContents.length // Return count for debugging
   };
 };
+
 export const action = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
   
@@ -363,7 +363,7 @@ export const action = async ({ request }) => {
     
     if (itemType === "product") {
       if (contentType === "description") {
-        mutation = gql`
+        mutation = `
           mutation productUpdate($input: ProductInput!) {
             productUpdate(input: $input) {
               product {
@@ -389,7 +389,7 @@ export const action = async ({ request }) => {
           },
         });
       } else if (contentType === "seo") {
-        mutation = gql`
+        mutation = `
           mutation productUpdate($input: ProductInput!) {
             productUpdate(input: $input) {
               product {
@@ -421,7 +421,7 @@ export const action = async ({ request }) => {
       }
     } else if (itemType === "collection") {
       if (contentType === "description") {
-        mutation = gql`
+        mutation = `
           mutation collectionUpdate($input: CollectionInput!) {
             collectionUpdate(input: $input) {
               collection {
@@ -447,7 +447,7 @@ export const action = async ({ request }) => {
           },
         });
       } else if (contentType === "seo") {
-        mutation = gql`
+        mutation = `
           mutation collectionUpdate($input: CollectionInput!) {
             collectionUpdate(input: $input) {
               collection {
