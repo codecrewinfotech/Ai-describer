@@ -1664,7 +1664,7 @@ export default function ContentDashboard() {
       Recommended apps
     </Text>
     <Button
-      url="https://apps.shopify.com/search?q=gaurang1"
+      url="https://apps.shopify.com/search?q=gaurang2"
       target="_blank"
       primary
     >
