@@ -24,7 +24,6 @@ import {
   InlineStack,
  
 } from "@shopify/polaris";
-import { gql } from "graphql-request";
 import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { authenticate } from "../shopify.server";
@@ -53,7 +52,8 @@ export async function loader({ request }) {
     }
     return items;
   };
-  const productQuery = gql`
+
+  const productQuery = `
     query getProducts($first: Int!, $after: String) {
       products(first: $first, after: $after) {
         edges {
@@ -78,7 +78,8 @@ export async function loader({ request }) {
       }
     }
   `;
-  const collectionQuery = gql`
+
+  const collectionQuery = `
     query getCollections($first: Int!, $after: String) {
       collections(first: $first, after: $after) {
         edges {
@@ -129,7 +130,7 @@ export async function action({ request }) {
 
     const mutations = {
       product: {
-        query: gql`
+        query: `
           mutation productUpdate($input: ProductInput!) {
             productUpdate(input: $input) {
               product {
@@ -158,7 +159,7 @@ export async function action({ request }) {
         }
       },
       collection: {
-        query: gql`
+        query: `
           mutation collectionUpdate($input: CollectionInput!) {
             collectionUpdate(input: $input) {
               collection {
@@ -230,6 +231,7 @@ export async function action({ request }) {
     }, { status: 500 });
   }
 }
+
 // Skeleton Loader Components
 const StatsSkeleton = () => (
   <div style={{
@@ -452,6 +454,7 @@ const LoadingSkeleton = () => (
     }} />
   </Page>
 );
+
 export default function ProductsPage() {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
@@ -672,7 +675,7 @@ const getGeneratedText = (response, contentType = null) => {
       if (!response.ok) {
               if(data.statusCode === 429){
 throw new Error(
-`You’ve reached the current usage limit. Please try again later.`)
+`You've reached the current usage limit. Please try again later.`)
               }
         throw new Error(`API request failed: ${data.message} ${response.statusText}`);
         
