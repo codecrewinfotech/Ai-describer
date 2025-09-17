@@ -2,13 +2,13 @@
 
 client_id = "4653d0dc46dda37af1fb314984b632cc"
 name = "Ai Describer"
-application_url = "https://jul-inch-decimal-nikon.trycloudflare.com"
+application_url = "https://ai-describer-production.up.railway.app"
 embedded = true
 handle = "ai-describer"
 
 [build]
 include_config_on_deploy = true
-automatically_update_urls_on_dev = true
+automatically_update_urls_on_dev = false
 
 [webhooks]
 api_version = "2025-07"
@@ -18,7 +18,7 @@ api_version = "2025-07"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://jul-inch-decimal-nikon.trycloudflare.com/auth/callback", "https://jul-inch-decimal-nikon.trycloudflare.com/auth/shopify/callback", "https://jul-inch-decimal-nikon.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://ai-describer-production.up.railway.app/auth/callback", "https://ai-describer-production.up.railway.app/auth/shopify/callback", "https://ai-describer-production.up.railway.app/api/auth/callback"]
 
 [pos]
 embedded = false
