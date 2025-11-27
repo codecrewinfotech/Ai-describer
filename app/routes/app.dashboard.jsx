@@ -22,7 +22,7 @@ import {
 import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 
-// Fixed: Properly construct the endpoint URL
+
 const getEndpoint = () => {
   const baseUrl = process.env.AI_DESCRIBER_ENDPOINT;
   if (!baseUrl) {
