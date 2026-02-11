@@ -742,9 +742,9 @@ const handlePublish = async () => {
   });
 
   try {
-    console.log("=== PUBLISH PROCESS STARTED ===");
-    console.log("Selected Item:", state.selectedItem);
-    console.log("Content Type:", state.contentType);
+    // console.log("=== PUBLISH PROCESS STARTED ===");
+    // console.log("Selected Item:", state.selectedItem);
+    // console.log("Content Type:", state.contentType);
     
     const generatedContent = state.editedContent || getGeneratedText(state.apiResponse, state.contentType);
     
@@ -753,14 +753,14 @@ const handlePublish = async () => {
     if (state.contentType === "seo-description") {
       // SEO descriptions - keep original logic unchanged
       oldContent = state.selectedItem.seo?.description || "";
-      console.log("Old SEO Description:", oldContent);
+      // console.log("Old SEO Description:", oldContent);
     } else {
       // **ONLY CHANGE**: For descriptions, prioritize descriptionHtml to get HTML formatted content
       oldContent = state.selectedItem.descriptionHtml || state.selectedItem.description || "";
-      console.log("Old Description (HTML format):", oldContent);
+      // console.log("Old Description (HTML format):", oldContent);
     }
     
-    console.log("New Content:", generatedContent);
+    // console.log("New Content:", generatedContent);
     
     // Prepare data for the external API endpoint
     const externalApiPayload = {
@@ -770,7 +770,7 @@ const handlePublish = async () => {
       originId: state.selectedItem.id,
     };
 
-    console.log("External API Payload:", externalApiPayload);
+    // console.log("External API Payload:", externalApiPayload);
 
     // Send to external endpoint first
     const externalResponse = await fetch(ENDPOINT, {
@@ -786,7 +786,7 @@ const handlePublish = async () => {
     }
 
     const externalData = await externalResponse.json();
-    console.log("External API response:", externalData);
+    // console.log("External API response:", externalData);
     
 
     // Prepare payload for Shopify update
@@ -802,7 +802,7 @@ const handlePublish = async () => {
       updatePayload.description = generatedContent;
     }
 
-    console.log("Shopify Update Payload:", updatePayload);
+    // console.log("Shopify Update Payload:", updatePayload);
 
     // Update local state
     const updatedItem = { ...state.selectedItem };
@@ -816,7 +816,7 @@ const handlePublish = async () => {
       updatedItem.descriptionHtml = generatedContent;
     }
 
-    console.log("Updated Item:", updatedItem);
+    // console.log("Updated Item:", updatedItem);
 
     updateState({
       selectedItem: updatedItem,
@@ -841,8 +841,8 @@ const handlePublish = async () => {
         body: JSON.stringify(updatePayload),
       });
 
-      console.log("Shopify Response Status:", shopifyResponse.status);
-      console.log("Shopify Response OK:", shopifyResponse.ok);
+      // console.log("Shopify Response Status:", shopifyResponse.status);
+      // console.log("Shopify Response OK:", shopifyResponse.ok);
 
       if (!shopifyResponse.ok) {
         console.error("Failed to update content on Shopify");
@@ -850,7 +850,7 @@ const handlePublish = async () => {
         console.error("Shopify Error Response:", errorText);
       } else {
         const shopifyResult = await shopifyResponse.json();
-        console.log("Shopify Success Response:", shopifyResult);
+        // console.log("Shopify Success Response:", shopifyResult);
       }
     } catch (shopifyErr) {
       console.error("Error updating Shopify content:", shopifyErr);

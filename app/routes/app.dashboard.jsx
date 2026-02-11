@@ -32,7 +32,7 @@ const getEndpoint = () => {
   
   // Ensure proper URL construction
   const endpoint = `${baseUrl.replace(/\/$/, '')}/contents`;
-  console.log('API Endpoint:', endpoint);
+  // console.log('API Endpoint:', endpoint);
   return endpoint;
 };
 
@@ -170,7 +170,7 @@ export const loader = async ({ request }) => {
     }
 
     try {
-      console.log('Fetching from endpoint:', ENDPOINT);
+      // console.log('Fetching from endpoint:', ENDPOINT);
       
       const response = await fetch(ENDPOINT, {
         method: "GET",
@@ -183,8 +183,8 @@ export const loader = async ({ request }) => {
         signal: AbortSignal.timeout(30000) // 30 seconds timeout
       });
       
-      console.log('API Response status:', response.status);
-      console.log('API Response headers:', Object.fromEntries(response.headers.entries()));
+      // console.log('API Response status:', response.status);
+      // console.log('API Response headers:', Object.fromEntries(response.headers.entries()));
       
       if (!response.ok) {
         console.error(`API request failed with status: ${response.status}`);
@@ -193,7 +193,7 @@ export const loader = async ({ request }) => {
       }
       
       const data = await response.json();
-      console.log('API Response data:', data);
+      // console.log('API Response data:', data);
       
       // Handle different response formats
       if (Array.isArray(data)) {
@@ -211,7 +211,7 @@ export const loader = async ({ request }) => {
     } catch (error) {
       if (error.name === 'TimeoutError') {
         console.error('API request timed out');
-      } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      } else if (error.name === 'TypeError' &&   error.message.includes('fetch')) {
         console.error('Network error - check if the API server is running:', error.message);
       } else {
         console.error('Failed to fetch original contents:', error);
@@ -221,7 +221,7 @@ export const loader = async ({ request }) => {
   };
 
   const originalContents = await fetchOriginalContentForItems();
-  console.log('Original contents loaded:', originalContents.length);
+  // console.log('Original contents loaded:', originalContents.length);
 
   // Helper function to check if content has been reverted
   const isContentReverted = (current, original) => {
