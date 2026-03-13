@@ -877,7 +877,7 @@ const handlePublish = async () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
    const handleGenerate = () => {
-    navigate("/");
+    navigate("/app");
   };
   const DropdownItem = ({ item, onClick }) => (
     <div
